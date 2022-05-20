@@ -26,9 +26,9 @@ function enableBionic() {
     // Split the text by spaces
     let html = text.split(' ').map( word => {
 
-      // If the word is shorter than 4 characters, return it as is
-      if ( word.length < 4 )
-        return word
+      // // If the word is shorter than 4 characters, return it as is
+      // if ( word.length < 4 )
+      //   return word
       
       let partToBolden = word.slice(0, Math.ceil(word.length * settings.boldnessCutoff))
       let currentWeight = getComputedStyle(node.parentElement).fontWeight
