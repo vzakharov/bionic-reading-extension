@@ -14,29 +14,31 @@ function enableBionic() {
   // Loop through all text nodes
   while ( walker.nextNode() ) {
    
-    // Make the text node bionic: split the text by words and make the first part of each word a bit bolder
     let { currentNode: node } = walker
     let { textContent: text } = node
-    let newText = text.split(/\b/).map( word => {
 
-      // If this is not a word, just return it
-      if ( !word.match(/\w/) ) return word
+    // Split the text by spaces
+    let html = text.split(' ').map( word => {
 
+      // If the word is shorter than 4 characters, return it as is
+      if ( word.length < 4 )
+        return word
+      
       let partToBolden = word.slice(0, Math.ceil(word.length * settings.boldnessCutoff))
       let currentWeight = getComputedStyle(node.parentElement).fontWeight
       let newWeight = parseInt(currentWeight) + settings.boldnessIncrement
 
       return `<span style="font-weight: ${newWeight}">${partToBolden}</span>${word.slice(partToBolden.length)}`
 
-    }).join('')
+    }).join(' ')
 
     // console.log(newText)
 
     // If the text changed, create a span to hold the bionic text and replace the text node with it
-    if ( newText !== text )
+    if ( html !== text )
       setTimeout( () => {
         let span = document.createElement('span')
-        span.innerHTML = newText
+        span.innerHTML = html
         node.parentNode.replaceChild(span, node)
       }, 0)
 
