@@ -26,4 +26,4 @@ All kudos for coming up with the idea for Bionic Reading goes to the guys at [@b
 
 # Thank me
 
-If you like this extension, you can support me by [buying me a beer](https://vzakharov.github.io/buy-me-a-beer/).v.github.io/buy-me-a-beer/).
+If you like this extension, you can support me by [buying me a beer](https://vzakharov.github.io/buy-me-a-beer/).
