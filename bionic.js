@@ -9,8 +9,12 @@ function enableBionic() {
       if ( getComputedStyle(node.parentElement).display === 'none' )
         return NodeFilter.FILTER_REJECT
       
-      // Skip textnodes whose parent element has a class of 'bionic'
-      if ( node.parentElement.classList.contains('bionic') )
+      // Skip textnodes whose parent is or is a descendant to a .bionic element
+      if ( ['.bionic', '.bionic *'].some( selector => node.parentElement.matches(selector) ) )
+        return NodeFilter.FILTER_REJECT
+
+      // If the textnode has no text, skip it
+      if ( node.textContent.trim() === '' )
         return NodeFilter.FILTER_REJECT
 
       return NodeFilter.FILTER_ACCEPT
