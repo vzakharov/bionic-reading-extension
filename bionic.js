@@ -1,6 +1,9 @@
 // Function to enable bionic reading for all text nodes
 function enableBionic() {
 
+  // Array of functions to replace text
+  let replaceFunctions = []
+
   // Create a walker to find all text nodes
   let walker = document.createTreeWalker(document.body, NodeFilter.SHOW_TEXT, 
     node => {
@@ -21,6 +24,7 @@ function enableBionic() {
 
     }, false)
 
+  console.time('Walked DOM')
   // Loop through all text nodes
   while ( walker.nextNode() ) {
    
@@ -45,15 +49,21 @@ function enableBionic() {
     // console.log(newText)
 
     // If the text changed, create a span to hold the bionic text and replace the text node with it
-    if ( html !== text )
-      setTimeout( () => {
-        let span = document.createElement('span')
-        span.classList.add('bionic')
-        span.innerHTML = html
-        node.parentNode.replaceChild(span, node)
-      }, 0)
+    replaceFunctions.push( () => {
+      let span = document.createElement('span')
+      span.classList.add('bionic')
+      span.innerHTML = html
+      node.parentNode.replaceChild(span, node)
+    } )
 
   }
+  console.timeEnd('Walked DOM')
+
+  console.time('Replaced text')
+  // Run all the replace functions
+  replaceFunctions.forEach( fn => fn() )
+  console.timeEnd('Replaced text')
+  console.log('Elements replaced:', replaceFunctions.length)
 
 }
 
