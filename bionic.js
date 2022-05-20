@@ -4,11 +4,17 @@ function enableBionic() {
   // Create a walker to find all text nodes
   let walker = document.createTreeWalker(document.body, NodeFilter.SHOW_TEXT, 
     node => {
+
       // Only accept textnodes whose element parent is visible
-      if ( getComputedStyle(node.parentElement).display !== 'none' ) {
-        return NodeFilter.FILTER_ACCEPT
-      }
-      return NodeFilter.FILTER_REJECT
+      if ( getComputedStyle(node.parentElement).display === 'none' )
+        return NodeFilter.FILTER_REJECT
+      
+      // Skip textnodes whose parent element has a class of 'bionic'
+      if ( node.parentElement.classList.contains('bionic') )
+        return NodeFilter.FILTER_REJECT
+
+      return NodeFilter.FILTER_ACCEPT
+
     }, false)
 
   // Loop through all text nodes
@@ -38,6 +44,7 @@ function enableBionic() {
     if ( html !== text )
       setTimeout( () => {
         let span = document.createElement('span')
+        span.classList.add('bionic')
         span.innerHTML = html
         node.parentNode.replaceChild(span, node)
       }, 0)
@@ -46,22 +53,14 @@ function enableBionic() {
 
 }
 
-let bionicEnabled = false
-
 // Bind the enableBionic function to the hotkey
 document.addEventListener('keydown', event => {
   
   let { hotkey: { key, modifier } } = settings
   
   if ( event.key === key && event[modifier + 'Key'] ) {
-    if ( !bionicEnabled ) {
-      enableBionic()
-      bionicEnabled = true
-      console.log('Bionic Reading enabled. Refresh the page to disable.') 
-    } else {
-      // Show a message to the user that they need to refresh the page to disable bionic reading
-      alert('Bionic Reading is already enabled. Refresh the page to disable.')
-    }
+    enableBionic()
+    bionicEnabled = true
   }
   
 })
