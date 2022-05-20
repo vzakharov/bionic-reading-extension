@@ -60,7 +60,6 @@ document.addEventListener('keydown', event => {
   
   if ( event.key === key && event[modifier + 'Key'] ) {
     enableBionic()
-    bionicEnabled = true
   }
   
 })
