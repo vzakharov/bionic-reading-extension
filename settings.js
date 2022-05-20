@@ -2,7 +2,7 @@ let settings = {
 
   // Hotkey to enable bionic reading
   hotkey: {
-    modifier: 'alt',
+    modifier: 'alt',    // Only 'alt', 'ctrl' and 'meta' (referring to the ⌘ key on Macs) are supported
     key: 'b'
   },
 
