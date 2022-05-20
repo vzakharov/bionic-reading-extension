@@ -14,7 +14,7 @@ Once the extension is installed, you can enable it by pressing `Alt + B` (config
 
 # Configuration
 
-For now, you can configure the extension by manually modifying the `settings.json` file. In the future, I will provide a configuration popup.
+For now, you can configure the extension by manually modifying the `settings.js` file. In the future, I will provide a configuration popup.
 
 # Notes
 
