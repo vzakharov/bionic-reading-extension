@@ -51,10 +51,15 @@ document.addEventListener('keydown', event => {
   
   let { hotkey: { key, modifier } } = settings
   
-  if ( event.key === key && event[modifier + 'Key'] && !bionicEnabled ) {
-    bionicEnabled = true
-    enableBionic()
-    console.log('Bionic Reading enabled. Refresh the page to disable.')
+  if ( event.key === key && event[modifier + 'Key'] ) {
+    if ( !bionicEnabled ) {
+      enableBionic()
+      bionicEnabled = true
+      console.log('Bionic Reading enabled. Refresh the page to disable.') 
+    } else {
+      // Show a message to the user that they need to refresh the page to disable bionic reading
+      alert('Bionic Reading is already enabled. Refresh the page to disable.')
+    }
   }
   
 })
