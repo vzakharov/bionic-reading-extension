@@ -30,7 +30,7 @@ function enableBionic() {
 
     }).join('')
 
-    console.log(newText)
+    // console.log(newText)
 
     // If the text changed, create a span to hold the bionic text and replace the text node with it
     if ( newText !== text )
@@ -52,9 +52,9 @@ document.addEventListener('keydown', event => {
   let { hotkey: { key, modifier } } = settings
   
   if ( event.key === key && event[modifier + 'Key'] && !bionicEnabled ) {
-    console.log('Enabling bionic reading')
     bionicEnabled = true
     enableBionic()
+    console.log('Bionic Reading enabled. Refresh the page to disable.')
   }
   
 })
